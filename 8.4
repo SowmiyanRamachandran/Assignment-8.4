@@ -1,0 +1,77 @@
+1) Explain the difference between FIFO and Capacity scheduler?
+
+FIFO SCHEDULER:
+
+The FIFO Scheduler places applications in a queue and runs them in the order of submission (first in, first out).
+Requests for the first application in the queue are allocated first; once its requests have been satisfied, the next application in the queue is served, and so on.
+In FIFO scheduler,  the small job is blocked until the large job completes.
+The FIFO Scheduler has the merit of being simple to understand and not needing any configuration, but it’s not suitable for shared clusters. 
+
+CAPACITY SCHEDULER:
+
+A separate dedicated queue allows the small job to start as soon as it is submitted, although this is at the cost of overall cluster
+utilization since the queue capacity is reserved for jobs in that queue. 
+If queues are not designed or used properly, some queues may be overloaded while some may be underutilised.
+Large job finishes late when compared with using the FIFO Scheduler.
+
+
+2) Explain the difference between Capacity and Fair scheduler ?
+
+CAPACITY SCHEDULER:
+
+-A separate dedicated queue allows the small job to start as soon as it is submitted, although this is at the cost of overall cluster
+utilization since the queue capacity is reserved for jobs in that queue. 
+-If queues are not designed or used properly, some queues may be overloaded while some may be underutilised.
+-Large job finishes late when compared with using the FIFO Scheduler.
+
+FAIR SCHEDULER:
+
+-With the Fair Scheduler, there is no need to reserve a set amount of capacity, since it will dynamically balance resources between all running jobs.
+-Just after the first (large) job starts, it is the only job running, so it gets all the resources in the cluster.
+-When the second (small) job starts, it is allocated half of the cluster resources, so that each job is using its fair share of resources.
+-After the small job completes and no longer requires resources, the large job goes back to using the full cluster capacity again.
+-The overall effect is both high cluster utilization and timely small job completion.
+
+ 3) Explain the difference between FIFO and Fair scheduler?
+ 
+ FIFO SCHEDULER:
+ 
+-The FIFO Scheduler places applications in a queue and runs them in the order of submission (first in, first out).
+-Requests for the first application in the queue are allocated first; once its requests have been satisfied, the next application in the queue is served, and so on.
+-In FIFO scheduler,  the small job is blocked until the large job completes.
+-The FIFO Scheduler has the merit of being simple to understand and not needing any configuration, but it’s not suitable for shared clusters.
+
+FAIR SCHEDULER:
+
+-With the Fair Scheduler, there is no need to reserve a set amount of capacity, since it will dynamically balance resources between all running jobs.
+-Just after the first (large) job starts, it is the only job running, so it gets all the resources in the cluster.
+-When the second (small) job starts, it is allocated half of the cluster resources, so that each job is using its fair share of resources.
+-After the small job completes and no longer requires resources, the large job goes back to using the full cluster capacity again.
+-The overall effect is both high cluster utilization and timely small job completion.
+
+4)  What are the limitations of hadoop 1.x and how they were overcome in hadoop 2.x ?
+
+Limitations:
+
+1) Only one NameNode is possible to configure i.e If NameNode fails entire cluster goes down, that is why NameNode is called as Single Point of Failure (SPOF)
+2) Secondary NameNode was just to take hourly backup of MetaData from NameNode.
+3) It is only suitable for Batch Processing of Huge amount of Data, which is already in Hadoop System.
+4) It is not suitable for Real-time Data Processing.
+5) It supports upto 4000 Nodes per Cluster.
+6) It has a single component : JobTracker to perform many activities like Resource Management, Job Scheduling, Job Monitoring, Re-scheduling Jobs etc.
+7) Namenode is the single point of failure.
+8) It supports only one Name Node and One Namespace per Cluster.
+9) It does not support Horizontal Scalability of NameNode.
+
+
+HADOOP 2.X:
+
+1) HDFS Federation – horizontal scalability of NameNode
+2) NameNode High Availability – NameNode is no longer a Single Point of Failure
+3) YARN – ability to process Terabytes and Petabytes of data available in HDFS using Non-MapReduce applications such as MPI, GIRAPH
+4) Resource Manager – splits up the two major functionalities of overburdened JobTracker (resource management and job scheduling/monitoring) into two separate daemons: a global Resource Manager and per-application ApplicationMaster
+There are additional features such as Capacity Scheduler (Enable Multi-tenancy support in Hadoop), Data Snapshot, Support for Windows, NFS access, enabling increased Hadoop adoption in the Industry to solve Big Data problems.
+
+
+
+
